@@ -23,12 +23,12 @@ const login = () => {
                 >
                     <input onBlur={handleOnBlur} name="email" type="email" className="form-control" id="floatingLoginEmail" placeholder="name@example.com"
                         required />
-                    <label htmlhtmlFor="floatingLoginEmail">Email address</label>
+                    <label htmlFor="floatingLoginEmail">Email address</label>
                 </div>
 
                 <div className="form-floating mb-1">
                     <input onBlur={handleOnBlur} name="password" type="password" className="form-control" id="floatingLoginPassword" placeholder="Password" required />
-                    <label htmlhtmlFor="floatingLoginPassword">Password</label>
+                    <label htmlFor="floatingLoginPassword">Password</label>
                 </div>
                 <small><a href="#!" className="text-muted">Forgot Password</a></small>
 
