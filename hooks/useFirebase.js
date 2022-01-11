@@ -18,7 +18,7 @@ const useFirebase = () => {
     const auth = getAuth();
 
 
-    const registerUser = (name, email, password, history) => {
+    const registerUser = (name, email, password, router) => {
         setIsLoading(true);
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
@@ -29,8 +29,8 @@ const useFirebase = () => {
                 updateProfile(auth.currentUser, {
                     displayName: name
                 }).then(() => {
-                    history.replace('/');
-                    swal("Account Created Successfully!", "You can now purchase courses and enjoy our services", "success");
+                    router.push('/profile');
+                    swal("Account Created Successfully!", "You can now chat with your friends and family", "success");
                 }).catch((error) => {
 
                 });
@@ -61,15 +61,12 @@ const useFirebase = () => {
 
 
 
-    const loginUser = (email, password, location, history) => {
+    const loginUser = (email, password, router) => {
         setIsLoading(true);
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                //Using location to redirect the user to his/her desired destination if the user was redirected to login page by the system. Doing this to improve the UX of the user.
-                const destination = location?.state?.from || '/';
-                history.replace(destination);
+                router.push(`/profile`);
                 toast.success(`Welcome back ${auth.currentUser.displayName.split(' ')[0]}`)
-
             })
             .catch((error) => {
                 if (error.message === "Firebase: Error (auth/wrong-password).") {

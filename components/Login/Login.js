@@ -1,16 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Logo from '../Logo/Logo';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import useAuth from '../../hooks/useAuth';
 
 const login = () => {
+    const [loginData, setLoginData] = useState({});
+    const { user, loginUser } = useAuth();
 
-    const handleLoginSubmit = () => {
+    const router = useRouter();
 
+    const handleOnBlur = e => {
+        const field = e.target.name;
+        const value = e.target.value;
+        const newLoginData = { ...loginData };
+        newLoginData[field] = value;
+        setLoginData(newLoginData);
     }
 
-    const handleOnBlur = () => {
 
+    const handleLoginSubmit = e => {
+        loginUser(loginData.email, loginData.password, router);
+        e.preventDefault();
     }
+
 
     return (
         <div className="d-flex flex-column justify-content-center align-items-center vh-100">
@@ -36,7 +49,7 @@ const login = () => {
                 <button type="submit" className="btn btn-danger w-100 mt-4 p-2 mb-3">Login</button>
 
 
-                <span href="/" className="d-flex justify-content-center text-danger fw-light">
+                <span type="button" href="/" className="d-flex justify-content-center text-danger fw-light">
                     Create an account
                 </span>
 
