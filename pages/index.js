@@ -1,12 +1,13 @@
 import Head from 'next/head';
-import Login from '../components/Login/Login';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import PrivateRoute from '../PrivateRoute/PrivateRoute';
 
 
 export default function Home() {
   return (
     <div className="container">
-      <Login></Login>
+      <PrivateRoute>
+        <h1>Hello Logged In</h1>
+      </PrivateRoute>
     </div>
   )
 }
